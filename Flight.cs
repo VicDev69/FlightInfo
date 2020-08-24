@@ -7,6 +7,7 @@ namespace FlightInfo
     {
 
         //Properties
+
         private string _airline;
         
 
@@ -40,6 +41,28 @@ namespace FlightInfo
             get { return _departingFrom; }
             set { _departingFrom = SetICAO(value); }
         }
+
+        private string _departureTime;
+
+        public string departureTime
+        {
+            get { return _departureTime; }
+            set { _departureTime = SetDepartureTime( value); }
+        }
+
+        private string SetDepartureTime(string value)
+        {
+            double tempHour = Convert.ToDouble(value.Substring(6, 2));
+            double tempMins = Convert.ToDouble(value.Substring(8, 2));
+            string tempTime = " ";
+            DateTime dtToday = DateTime.Today.AddHours(tempHour).AddMinutes(tempMins);
+            tempTime = dtToday.ToString("yyyy/MM/dd hh:mm");
+            return tempTime;
+        }
+
+
+
+
         private string _arrivingAt;
 
         public string arrivingAt
@@ -48,6 +71,24 @@ namespace FlightInfo
             set { _arrivingAt = SetICAO(value); }
         }
 
+        private string _arrivalTime;
+
+        public string arrivalTime
+        {
+            get { return _arrivalTime; }
+            set { _arrivalTime = SetArrivalTime(value); }
+        }
+
+        private string SetArrivalTime(string value)
+        {
+            DateTime tempDate = Convert.ToDateTime(_departureTime);
+            int i = value.IndexOf(':');
+            double durationHours =Convert.ToDouble( value.Substring(0, i));
+            double durationMins = Convert.ToDouble(value.Substring(i + 1, 2)); 
+            DateTime tempTime = tempDate.AddHours(durationHours).AddMinutes(durationMins);
+
+            return tempTime.ToString("yyyy/MM/dd hh:mm");
+        }
 
         private string SetICAO(string value)
         {
@@ -74,5 +115,11 @@ namespace FlightInfo
         {
             airline = Airline;
         }
+    }
+
+    public class Arival
+    {
+        string duration;
+        string departureTime;
     }
 }

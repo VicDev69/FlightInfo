@@ -56,7 +56,7 @@ namespace FlightInfo
             double tempMins = Convert.ToDouble(value.Substring(8, 2));
             string tempTime = " ";
             DateTime dtToday = DateTime.Today.AddHours(tempHour).AddMinutes(tempMins);
-            tempTime = dtToday.ToString("yyyy/MM/dd hh:mm");
+            tempTime = dtToday.ToString("yyyy/MM/dd HH:mm");
             return tempTime;
         }
 
@@ -87,7 +87,7 @@ namespace FlightInfo
             double durationMins = Convert.ToDouble(value.Substring(i + 1, 2)); 
             DateTime tempTime = tempDate.AddHours(durationHours).AddMinutes(durationMins);
 
-            return tempTime.ToString("yyyy/MM/dd hh:mm");
+            return tempTime.ToString("yyyy/MM/dd HH:mm");
         }
 
         private string SetICAO(string value)
